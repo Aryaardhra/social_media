@@ -1,27 +1,22 @@
-import React, { useState } from 'react';
-import { LoginSocialFacebook } from 'reactjs-social-login';
-import { FacebookLoginButton } from 'react-social-login-buttons';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom'
+import Facebook from './components/facebook/Facebook';
+import LinkedIn from './components/linkedin/LinkedIn';
+import LandingPage from './components/landing_page/LandingPage';
+import Header from './components/header/Header';
 
 export default function App() {
 
-  const [profile, setProfile] = useState(null);
-
   return (
    <>
-    <LoginSocialFacebook
-     appId='1262911381284349'
-     onResolve={(response) => {
-     console.log(response);
-     setProfile(response.data);
-    }}
-    onReject={(error)=>{
-    console.log(error);
-    }}
-   >
-   <FacebookLoginButton/>
-   </LoginSocialFacebook>
-
-   {profile? <span>{profile.name}</span> :" "}
+     < div className="App">
+      <Header showParam/>
+        <Routes>
+          <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/facebook" element={<Facebook />} />
+          <Route exact path="/linkedIn" element={<LinkedIn />} />
+        </Routes>
+    </div>
    </>
   )
 }
